@@ -15,6 +15,9 @@ namespace Bahar.DemoApp.InventoryService.Model
             InventoryName = inventoryName;
             CurrentAddress = currentAddress;
             PhoneNumber = phoneNumber;
+
+
+
         }
 
         public string InventoryName { get; set; }
