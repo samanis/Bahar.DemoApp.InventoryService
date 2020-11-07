@@ -11,6 +11,12 @@ namespace Bahar.DemoApp.InventoryService.Model
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inventoryName"></param>
+        /// <param name="currentAddress"></param>
+        /// <param name="phoneNumber"></param>
         public Inventory(string inventoryName, string currentAddress, string phoneNumber)
         {
             ValidateInventoryName_Address(inventoryName, currentAddress);
