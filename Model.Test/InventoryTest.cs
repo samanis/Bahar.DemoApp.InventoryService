@@ -22,7 +22,7 @@ namespace Model.Test
         {
             ArgumentException exception = Assert.
                 Throws<ArgumentException>(() => new Inventory("", "address1", "1234567893"));
-            Assert.Equal("Inventory Name can not be null or empty string", exception.Message);
+            Assert.Equal("Inventory Name can not be null or empty string.", exception.Message);
         }
 
 
@@ -32,7 +32,7 @@ namespace Model.Test
         {
             ArgumentException exception = Assert.
                Throws<ArgumentException>(() => new Inventory(name, "address1", "1234567893"));
-            Assert.Equal("Inventory Name can not be more than 64 charachter", exception.Message);
+            Assert.Equal("Inventory Name can not be more than 64 charachter.", exception.Message);
         }
 
 
@@ -51,7 +51,7 @@ namespace Model.Test
         {
             ArgumentException exception = Assert.
                 Throws<ArgumentException>(() => new Inventory("Inventory Name", "", "1478523696"));
-            Assert.Equal("Address can not be empty or null string", exception.Message);
+            Assert.Equal("Address can not be empty or null string.", exception.Message);
         }
 
 
@@ -70,7 +70,7 @@ namespace Model.Test
         {
             ArgumentException exception = Assert.
                 Throws<ArgumentException>(() => new Inventory("Inventory Name", "address ", ""));
-            Assert.Equal("Phone Number can not be null or empty string", exception.Message);
+            Assert.Equal("Phone Number can not be null or empty string.", exception.Message);
         }
 
         [Theory]
@@ -80,7 +80,15 @@ namespace Model.Test
         {
             ArgumentException exception = Assert.
                 Throws<ArgumentException>(() => new Inventory("Inventory Name", "address ", phoneNumber));
-            Assert.Equal("Phone Number should be just 10 character (No more or less)", exception.Message);
+            Assert.Equal("Phone Number should be just 10 character (No more or less).", exception.Message);
+        }
+
+        [Fact]
+        public void Throws_Exception_When_Address_Phone_Invalid()
+        {
+            ArgumentException exception = Assert.
+                Throws<ArgumentException>(() => new Inventory("Inventory Name", " ", "111"));
+            Assert.Equal("Address can not be empty or null string.Phone Number should be just 10 character (No more or less).", exception.Message);
         }
 
     }
