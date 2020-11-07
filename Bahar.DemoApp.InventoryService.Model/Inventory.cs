@@ -47,6 +47,7 @@ namespace Bahar.DemoApp.InventoryService.Model
                 throw new ArgumentException(errormessage.Trim());
         }
 
+
         public void ValidatePhoneNumber(string phonenumber)
         {
             string errormessage = string.Empty;
