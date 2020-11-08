@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Bahar.DemoApp.InventoryService.Model.Repository
 {
-    public interface IRepository<T>
+    public interface IinventoryRepository : IRepository<Inventory>
     {
-        public void Save(T entity);
-
-        public void Delete(T entity);
+      
     }
 }

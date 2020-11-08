@@ -4,5 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Bahar.DemoApp.InventoryService.AppService\Bahar.DemoApp.InventoryService.AppService.csproj" />
+  </ItemGroup>
+
 
 </Project>

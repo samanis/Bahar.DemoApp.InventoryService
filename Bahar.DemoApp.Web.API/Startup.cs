@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bahar.DemoApp.InventoryService.AppService;
+using Bahar.DemoApp.InventoryService.Model.Repository;
+using Bahar.DemoApp.InventoryService.Repository.SQLServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +28,9 @@ namespace Bahar.DemoApp.Web.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<InventoryContext, InventoryContext>();
+            services.AddScoped<IinventoryRepository, InventoryRepository>();
+            services.AddScoped<IInventoryService, InventoryService.AppService.InventoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
