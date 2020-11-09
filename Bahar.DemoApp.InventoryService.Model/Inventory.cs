@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
 namespace Bahar.DemoApp.InventoryService.Model
 {
-    public class Inventory : EntityBase<int>
+    public class Inventory : IValidatableObject
     {
         private string _errormessage = string.Empty;
+
         public Inventory()
         {
+
         }
 
         public Inventory(string inventoryName, string currentAddress, string phoneNumber)
@@ -21,17 +24,17 @@ namespace Bahar.DemoApp.InventoryService.Model
             CurrentAddress = currentAddress;
 
             ValidatePhoneNumber(phoneNumber);
-            Validate();
+
             PhoneNumber = string.Format("({0}) {1}-{2}", phoneNumber.Substring(0, 3), phoneNumber.Substring(3, 3), phoneNumber.Substring(6, 4));
 
 
         }
 
         public string InventoryName { get; set; }
-
+        public string PhoneNumber { get; set; }
         public string CurrentAddress { get; set; }
 
-        public string PhoneNumber { get; set; }
+
 
         public void ValidateInventoryName(string Inventoryname)
         {
@@ -51,21 +54,33 @@ namespace Bahar.DemoApp.InventoryService.Model
                 _errormessage += "Address can not be empty or null string.";
         }
 
-        public void ValidatePhoneNumber(string phonenumber)
+        public bool ValidatePhoneNumber(string phonenumber)
         {
-
-            if (string.IsNullOrEmpty(phonenumber.Trim()))
+            bool value = true;
+            if ((phonenumber is null) || string.IsNullOrEmpty(phonenumber.Trim()))
+            {
                 _errormessage += "Phone Number can not be null or empty string.";
-
+                value = false;
+            }
             else if (phonenumber.Count() < 10 || phonenumber.Count() > 10)
+            {
                 _errormessage += "Phone Number should be just 10 character (No more or less).";
+                value = false;
+            }
+            return value;
 
         }
 
-        private void Validate()
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!string.IsNullOrEmpty(_errormessage))
-                throw new ArgumentException(_errormessage);
+            ValidateInventoryName(InventoryName);
+            ValidateInventoryAddress(CurrentAddress);
+            if (ValidatePhoneNumber(PhoneNumber))
+            {
+                PhoneNumber = string.Format("({0}) {1}-{2}", PhoneNumber.Substring(0, 3), PhoneNumber.Substring(3, 3), PhoneNumber.Substring(6, 4));
+            }
+
+            yield return new ValidationResult(_errormessage + PhoneNumber);
         }
     }
 }

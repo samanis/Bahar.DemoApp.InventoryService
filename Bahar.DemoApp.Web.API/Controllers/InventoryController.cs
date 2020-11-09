@@ -19,11 +19,14 @@ namespace Bahar.DemoApp.InventoryService.Web.API.Controllers
             _inventoryService = inventoryService;
         }
 
+
+       
         [HttpPost]
         public IActionResult SaveNewInventory(Inventory inventory)
         {
+        //    throw new Exception("Test Exception");
             _inventoryService.AddInventory(inventory);
             return Ok();
-        }
+            }
     }
 }

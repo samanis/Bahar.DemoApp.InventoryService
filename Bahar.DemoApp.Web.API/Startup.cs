@@ -7,6 +7,7 @@ using Bahar.DemoApp.InventoryService.Model.Repository;
 using Bahar.DemoApp.InventoryService.Repository.SQLServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,7 +41,18 @@ namespace Bahar.DemoApp.Web.API
             {
                 app.UseDeveloperExceptionPage();
             }
+        /*    else
+            {
+                app.UseExceptionHandler(appBuilder =>
+                {
+                    appBuilder.Run(async context =>
+                {
+                    context.Response.StatusCode = 500;
+                    await context.Response.WriteAsync("An un expected fault happened .Try again later.");
+                });
+                });
 
+            }*/
             app.UseRouting();
 
             app.UseAuthorization();
