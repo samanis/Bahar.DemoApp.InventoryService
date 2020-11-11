@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Bahar.DemoApp.InventoryService.Model.Repository
 {
-    public interface IinventoryRepository : IRepository<Inventory>
+    public interface IinventoryRepository : IRepository<Inventory,int>
     {
       
     }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bahar.DemoApp.InventoryService.Web.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Inventories")]
     [ApiController]
     public class InventoryController : ControllerBase
     {
@@ -19,14 +19,20 @@ namespace Bahar.DemoApp.InventoryService.Web.API.Controllers
             _inventoryService = inventoryService;
         }
 
+        [HttpGet("{Id}", Name ="GetInventory")]
+        public ActionResult <Inventory> GetInventory(int Id)
+        {
+            var inventory= _inventoryService.GetInventory(Id);
+            return Ok(inventory);
 
-       
+        }      
         [HttpPost]
         public IActionResult SaveNewInventory(Inventory inventory)
         {
-        //    throw new Exception("Test Exception");
-            _inventoryService.AddInventory(inventory);
-            return Ok();
+           _inventoryService.AddInventory(inventory);
+            var InventoryToReturn = inventory;
+            return   CreatedAtRoute("GetInventory",
+                new { Id = inventory.id }, InventoryToReturn);
             }
     }
 }

@@ -6,30 +6,16 @@ using System.Text;
 
 namespace Bahar.DemoApp.InventoryService.Model
 {
-    public class Inventory : IValidatableObject
+    public class Inventory : EntityBase<int> ,IValidatableObject
     {
         private string _errormessage = string.Empty;
-
+        
         public Inventory()
         {
 
         }
 
-        public Inventory(string inventoryName, string currentAddress, string phoneNumber)
-        {
-            ValidateInventoryName(inventoryName);
-            InventoryName = inventoryName;
-
-            ValidateInventoryAddress(currentAddress);
-            CurrentAddress = currentAddress;
-
-            ValidatePhoneNumber(phoneNumber);
-
-            PhoneNumber = string.Format("({0}) {1}-{2}", phoneNumber.Substring(0, 3), phoneNumber.Substring(3, 3), phoneNumber.Substring(6, 4));
-
-
-        }
-
+      
         public string InventoryName { get; set; }
         public string PhoneNumber { get; set; }
         public string CurrentAddress { get; set; }
@@ -39,9 +25,9 @@ namespace Bahar.DemoApp.InventoryService.Model
         public void ValidateInventoryName(string Inventoryname)
         {
 
-            if (string.IsNullOrEmpty(Inventoryname.Trim()))
+            if ((InventoryName is null)|| string.IsNullOrEmpty(Inventoryname.Trim()))
                 _errormessage += "Inventory Name can not be null or empty string.";
-
+            else
 
             if (Inventoryname.Count() > 64)
                 _errormessage += "Inventory Name can not be more than 64 charachter.";
@@ -50,7 +36,7 @@ namespace Bahar.DemoApp.InventoryService.Model
 
         public void ValidateInventoryAddress(string currentAddress)
         {
-            if (string.IsNullOrEmpty(currentAddress.Trim()))
+            if ((currentAddress is null)|| string.IsNullOrEmpty(currentAddress.Trim()))
                 _errormessage += "Address can not be empty or null string.";
         }
 
@@ -79,8 +65,8 @@ namespace Bahar.DemoApp.InventoryService.Model
             {
                 PhoneNumber = string.Format("({0}) {1}-{2}", PhoneNumber.Substring(0, 3), PhoneNumber.Substring(3, 3), PhoneNumber.Substring(6, 4));
             }
-
-            yield return new ValidationResult(_errormessage + PhoneNumber);
+                if (!string.IsNullOrEmpty(_errormessage))
+                yield return new ValidationResult(_errormessage);
         }
     }
 }

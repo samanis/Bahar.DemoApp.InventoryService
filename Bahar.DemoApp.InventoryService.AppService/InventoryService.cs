@@ -15,7 +15,12 @@ namespace Bahar.DemoApp.InventoryService.AppService
 
         public void AddInventory(Inventory inventory)
         {
-            _iinventoryRepository.Save(inventory);
+           _iinventoryRepository.Save(inventory);
+        }
+
+        public Inventory GetInventory(int Id)
+        {
+          return  _iinventoryRepository.GetInventory(Id);
         }
     }
 

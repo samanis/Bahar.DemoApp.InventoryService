@@ -20,6 +20,14 @@ namespace Bahar.DemoApp.InventoryService.Repository.SQLServer
             throw new NotImplementedException();
         }
 
+        public Inventory GetInventory(int Id)
+        {
+           var findedItem= _context.Inventory.Find(Id);
+            return findedItem;
+        }
+
+      
+
         public void Save(Inventory entity)
         {
             _context.Inventory.Add(entity);
