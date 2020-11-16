@@ -4,18 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
-namespace Bahar.DemoApp.InventoryService.Model
+namespace Bahar.DemoApp.InventoryService.AppService
 {
-    public class Inventory : EntityBase<int>, IValidatableObject
+    public class InventoryForCreationDto : IValidatableObject
     {
         private string _errormessage = string.Empty;
 
-       
         public string InventoryName { get; set; }
         public string PhoneNumber { get; set; }
         public string CurrentAddress { get; set; }
-        public IEnumerable<InventoryItem> inventoryItems { get; set; }
-
 
         public void ValidateInventoryName(string Inventoryname)
         {
@@ -63,5 +60,6 @@ namespace Bahar.DemoApp.InventoryService.Model
             if (!string.IsNullOrEmpty(_errormessage))
                 yield return new ValidationResult(_errormessage);
         }
+
     }
 }

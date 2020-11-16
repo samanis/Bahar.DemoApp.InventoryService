@@ -1,12 +1,15 @@
 ﻿using Bahar.DemoApp.InventoryService.Model;
+using System.Collections.Generic;
 
 namespace Bahar.DemoApp.InventoryService.AppService
 {
     public interface IInventoryService
     {
-        public void AddInventory(Inventory inventory);
+        public InventoryDto AddInventory(InventoryForCreationDto inventory);
 
-        public Inventory GetInventory(int Id);
+        public InventoryDto FindbyId(int Id);
+
+        public IEnumerable<InventoryDto> ReturnAllRows();
     }
 
 }

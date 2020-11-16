@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bahar.DemoApp.InventoryService.Repository.SQLServer.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    partial class IventoryContextModelSnapshot : ModelSnapshot
+    partial class InventoryContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,44 @@ namespace Bahar.DemoApp.InventoryService.Repository.SQLServer.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Inventory");
+                });
+
+            modelBuilder.Entity("Bahar.DemoApp.InventoryService.Model.InventoryItem", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Inventoryid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quentity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SKU")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UOM")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Inventoryid");
+
+                    b.ToTable("inventoryItem");
+                });
+
+            modelBuilder.Entity("Bahar.DemoApp.InventoryService.Model.InventoryItem", b =>
+                {
+                    b.HasOne("Bahar.DemoApp.InventoryService.Model.Inventory", "inventory")
+                        .WithMany("inventoryItems")
+                        .HasForeignKey("Inventoryid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

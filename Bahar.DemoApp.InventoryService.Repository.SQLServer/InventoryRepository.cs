@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Bahar.DemoApp.InventoryService.Model;
 using Bahar.DemoApp.InventoryService.Model.Repository;
+using System.Linq;
 
 namespace Bahar.DemoApp.InventoryService.Repository.SQLServer
 {
@@ -20,13 +21,16 @@ namespace Bahar.DemoApp.InventoryService.Repository.SQLServer
             throw new NotImplementedException();
         }
 
-        public Inventory GetInventory(int Id)
+        public Inventory FindbyId(int Id)
         {
            var findedItem= _context.Inventory.Find(Id);
             return findedItem;
         }
 
-      
+        public IEnumerable<Inventory> ReturnAllRows()
+        {
+             return _context.Inventory.ToList();
+        }
 
         public void Save(Inventory entity)
         {

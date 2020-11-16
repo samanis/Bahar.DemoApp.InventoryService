@@ -10,6 +10,8 @@ namespace Bahar.DemoApp.InventoryService.Model.Repository
 
         public void Delete(T entity);
 
-        public T GetInventory(J Id);
+        public T FindbyId(J Id);
+
+        public IEnumerable<T> ReturnAllRows();
     }
 }

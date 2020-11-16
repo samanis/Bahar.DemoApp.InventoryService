@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Bahar.DemoApp.InventoryService.AppService;
 using Bahar.DemoApp.InventoryService.Model.Repository;
 using Bahar.DemoApp.InventoryService.Repository.SQLServer;
@@ -33,6 +34,8 @@ namespace Bahar.DemoApp.Web.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
+            
+
 
               .ConfigureApiBehaviorOptions(setupAction =>
                {
@@ -74,11 +77,14 @@ namespace Bahar.DemoApp.Web.API
                    };
 
                });
-              
-             
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<InventoryContext, InventoryContext>();
             services.AddScoped<IinventoryRepository, InventoryRepository>();
             services.AddScoped<IInventoryService, InventoryService.AppService.InventoryService>();
+            services.AddScoped<IinventoryItemRepository, InventoryItemRepository>();
+            services.AddScoped<IInventoryItemService, InventoryItemService>();
 
 
         }

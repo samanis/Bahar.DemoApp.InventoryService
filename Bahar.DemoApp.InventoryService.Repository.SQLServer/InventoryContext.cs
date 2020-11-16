@@ -9,6 +9,7 @@ namespace Bahar.DemoApp.InventoryService.Repository.SQLServer
     public class InventoryContext : DbContext
     {
         public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<InventoryItem> inventoryItem { get; set; }
         public InventoryContext()
         {
         }
