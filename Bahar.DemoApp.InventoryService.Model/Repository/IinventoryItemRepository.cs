@@ -6,10 +6,10 @@ using Bahar.DemoApp.InventoryService.Model.Repository;
 
 namespace Bahar.DemoApp.InventoryService.Model.Repository
 {
-    public interface IinventoryItemRepository: IRepository<InventoryItem ,int>
+    public interface IinventoryItemRepository : IRepository<InventoryItem, int>
     {
-       void SaveInventoryItem(int InventoryId, InventoryItem inventoryItem);
-       bool InventoryExists(int InventoryId);
+        void SaveInventoryItem(int InventoryId, InventoryItem inventoryItem);
+        bool InventoryExists(int InventoryId);
 
         IEnumerable<InventoryItem> GetInventoryItems(InventoryItemResourceParameters inventoryItemResourceParameters);
 

@@ -71,5 +71,25 @@ namespace Bahar.DemoApp.InventoryService.Repository.SQLServer
             _context.inventoryItem.Add(entity);
             _context.SaveChanges();
                 }
+
+        public IEnumerable<InventoryItem> GetInventoryItems(InventoryItemResourceParameters inventoryItemResourceParameters)
+        {
+            string searchQuery = inventoryItemResourceParameters.SearchQuery;
+
+            IQueryable<InventoryItem> inventoryItems = _context.inventoryItem;
+
+            inventoryItems = inventoryItems.Where(x => x.UOM == (UnitOfMesure)inventoryItemResourceParameters.UOM 
+            || x.SKU.Contains(searchQuery)
+            || x.Quentity == inventoryItemResourceParameters.Quantity
+            || x.Name.Contains(searchQuery));
+
+            return inventoryItems.ToList();
+
+        }
+
+        public IEnumerable<InventoryItem> ReturnAllRows()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

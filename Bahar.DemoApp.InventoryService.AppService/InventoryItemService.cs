@@ -35,22 +35,22 @@ namespace Bahar.DemoApp.InventoryService.AppService
             return inventoryItemToreturn;
         }
 
-        public IEnumerable<InventoryItemDto> GetInventoryItems(ResourceParameters.InventoryItemResourceParameters inventoryItemResourceParameters)
+        public IEnumerable<InventoryItemDto> GetInventoryItems(InventoryItemResourceParameters inventoryItemResourceParameters)
         {
+            IEnumerable<InventoryItem> inventoryItems;
             if (inventoryItemResourceParameters == null)
             {
                 throw new ArgumentNullException(nameof(inventoryItemResourceParameters));
             }
-            if ((inventoryItemResourceParameters.Inventoryid == 0) && (string.IsNullOrWhiteSpace(inventoryItemResourceParameters.SearchQuery)))
+            if ((inventoryItemResourceParameters.Inventoryid == 0) || (string.IsNullOrWhiteSpace(inventoryItemResourceParameters.SearchQuery)))
             {
-                var InventoryItemFromRep = _iinventoItemRepository.ReturnAllRows();
-                var InventoryItems = new List<InventoryItemDto>();
-                return (_mapper.Map<IEnumerable<InventoryItemDto>>(InventoryItemFromRep));
+                inventoryItems = _iinventoItemRepository.ReturnAllRows();
+                return (_mapper.Map<IEnumerable<InventoryItemDto>>(inventoryItems));
             }
 
-        
+            inventoryItems = _iinventoItemRepository.GetInventoryItems(inventoryItemResourceParameters);
 
-            return (_mapper.Map<IEnumerable<InventoryItemDto>>(InventoryItemFromRep));
+            return (_mapper.Map<IEnumerable<InventoryItemDto>>(inventoryItems));
 
         }
 

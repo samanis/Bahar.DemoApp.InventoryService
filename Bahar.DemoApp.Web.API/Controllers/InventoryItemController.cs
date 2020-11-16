@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Bahar.DemoApp.InventoryService.AppService;
-using Bahar.DemoApp.InventoryService.Model;
-using Microsoft.AspNetCore.Http;
+﻿using Bahar.DemoApp.InventoryService.AppService;
 using Microsoft.AspNetCore.Mvc;
-using Bahar.DemoApp.InventoryService.AppService.ResourceParameters;
+using Bahar.DemoApp.InventoryService.Model.Repository;
 
 namespace Bahar.DemoApp.InventoryService.Web.API.Controllers
 {
