@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Bahar.DemoApp.InventoryService.AppService;
+using Bahar.DemoApp.InventoryService.AppService.Dtos;
+using Bahar.DemoApp.InventoryService.AppService.interfaces;
 using Bahar.DemoApp.InventoryService.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Bahar.DemoApp.InventoryService.AppService
+namespace Bahar.DemoApp.InventoryService.AppService.Dtos
 {
     public class InventoryItemForCreationDto : IValidatableObject
     {
@@ -22,7 +22,7 @@ namespace Bahar.DemoApp.InventoryService.AppService
 
         public void ValidateInventoryItemName(string name)
         {
-            if ((name is null) || string.IsNullOrEmpty(name.Trim()))
+            if (name is null || string.IsNullOrEmpty(name.Trim()))
             {
                 _errormessage += "Inventory Item Name can not be null or empty string.";
             }
@@ -30,7 +30,7 @@ namespace Bahar.DemoApp.InventoryService.AppService
 
         public void ValidateItemSKU(string sku)
         {
-            if ((sku is null) || string.IsNullOrEmpty(sku.Trim()))
+            if (sku is null || string.IsNullOrEmpty(sku.Trim()))
             {
                 _errormessage += "Item SKU can not be null or empty string.";
             }
@@ -38,7 +38,7 @@ namespace Bahar.DemoApp.InventoryService.AppService
 
         public void ValidateItemUOM(UnitOfMesure uom)
         {
-            int ConvertTointUOM = (int)uom.GetHashCode();
+            int ConvertTointUOM = uom.GetHashCode();
 
             if (ConvertTointUOM < 0 || ConvertTointUOM > 2)
             {
@@ -48,18 +48,18 @@ namespace Bahar.DemoApp.InventoryService.AppService
         }
         public void ValidateQty(int qty)
         {
-            if ((qty <= 0))
+            if (qty <= 0)
             {
                 _errormessage += "Quentity can not be 0 or Less than 0";
             }
         }
-       /* public void ValidateInventoryId(int inventoryid)
-        {
-            if (inventoryid == 0)
-            {
-                _errormessage += "Erorrrrr";
-            }
-        }*/
+        /* public void ValidateInventoryId(int inventoryid)
+         {
+             if (inventoryid == 0)
+             {
+                 _errormessage += "Erorrrrr";
+             }
+         }*/
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -67,7 +67,7 @@ namespace Bahar.DemoApp.InventoryService.AppService
             ValidateItemSKU(SKU);
             ValidateQty(Quentity);
             ValidateItemUOM(UOM);
-         //   ValidateInventoryId(Inventoryid);
+            //   ValidateInventoryId(Inventoryid);
 
             if (!string.IsNullOrEmpty(_errormessage))
                 yield return new ValidationResult(_errormessage);

@@ -1,7 +1,8 @@
-﻿using Bahar.DemoApp.InventoryService.Model;
+﻿using Bahar.DemoApp.InventoryService.AppService.Dtos;
+using Bahar.DemoApp.InventoryService.Model;
 using System.Collections.Generic;
 
-namespace Bahar.DemoApp.InventoryService.AppService
+namespace Bahar.DemoApp.InventoryService.AppService.interfaces
 {
     public interface IInventoryService
     {

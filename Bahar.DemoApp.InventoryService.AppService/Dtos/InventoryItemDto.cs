@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bahar.DemoApp.InventoryService.AppService
+namespace Bahar.DemoApp.InventoryService.AppService.Dtos
 {
-    public class InventoryItemDto 
+    public class InventoryItemDto
 
     {
         public int id { get; set; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Bahar.DemoApp.InventoryService.AppService;
+using Bahar.DemoApp.InventoryService.AppService.interfaces;
 using Bahar.DemoApp.InventoryService.Model.Repository;
 using Bahar.DemoApp.InventoryService.Repository.SQLServer;
 using Microsoft.AspNetCore.Builder;
@@ -104,6 +105,7 @@ namespace Bahar.DemoApp.Web.API
                 {
                     context.Response.StatusCode = 500;
                     await context.Response.WriteAsync("An un expected fault happened .Try again later.");
+
                 });
                 });
             }

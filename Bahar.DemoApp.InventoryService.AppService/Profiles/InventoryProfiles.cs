@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using Bahar.DemoApp.InventoryService.AppService.Dtos;
 
 namespace Bahar.DemoApp.InventoryService.AppService.Profiles
 {
@@ -9,8 +10,8 @@ namespace Bahar.DemoApp.InventoryService.AppService.Profiles
     {
         public InventoryProfiles()
         {
-            CreateMap<Model.Inventory, AppService.InventoryDto>();
-            CreateMap<AppService.InventoryForCreationDto, Model.Inventory>();
+            CreateMap<Model.Inventory, InventoryDto>();
+            CreateMap<InventoryForCreationDto, Model.Inventory>();
         }
     }
 }

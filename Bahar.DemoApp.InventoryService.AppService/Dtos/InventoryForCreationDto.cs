@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
-namespace Bahar.DemoApp.InventoryService.AppService
+namespace Bahar.DemoApp.InventoryService.AppService.Dtos
 {
     public class InventoryForCreationDto : IValidatableObject
     {
@@ -17,7 +17,7 @@ namespace Bahar.DemoApp.InventoryService.AppService
         public void ValidateInventoryName(string Inventoryname)
         {
 
-            if ((InventoryName is null) || string.IsNullOrEmpty(Inventoryname.Trim()))
+            if (InventoryName is null || string.IsNullOrEmpty(Inventoryname.Trim()))
                 _errormessage += "Inventory Name can not be null or empty string.";
             else
 
@@ -28,14 +28,14 @@ namespace Bahar.DemoApp.InventoryService.AppService
 
         public void ValidateInventoryAddress(string currentAddress)
         {
-            if ((currentAddress is null) || string.IsNullOrEmpty(currentAddress.Trim()))
+            if (currentAddress is null || string.IsNullOrEmpty(currentAddress.Trim()))
                 _errormessage += "Address can not be empty or null string.";
         }
 
         public bool ValidatePhoneNumber(string phonenumber)
         {
             bool value = true;
-            if ((phonenumber is null) || string.IsNullOrEmpty(phonenumber.Trim()))
+            if (phonenumber is null || string.IsNullOrEmpty(phonenumber.Trim()))
             {
                 _errormessage += "Phone Number can not be null or empty string.";
                 value = false;

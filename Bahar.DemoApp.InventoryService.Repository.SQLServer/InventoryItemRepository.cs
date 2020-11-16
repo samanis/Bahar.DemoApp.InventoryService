@@ -10,7 +10,7 @@ namespace Bahar.DemoApp.InventoryService.Repository.SQLServer
 {
     public class InventoryItemRepository : IinventoryItemRepository
     {
-      
+
         private InventoryContext _context;
 
         public InventoryItemRepository(InventoryContext context)
@@ -27,7 +27,15 @@ namespace Bahar.DemoApp.InventoryService.Repository.SQLServer
 
         public InventoryItem FindbyId(int Id)
         {
-            return _context.inventoryItem.Find(Id);
+            try
+            {
+                return _context.inventoryItem.Find(Id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
         }
 
@@ -50,27 +58,36 @@ namespace Bahar.DemoApp.InventoryService.Repository.SQLServer
         {
             throw new NotImplementedException();
         }
+
         public void SaveInventoryItem(int InventoryId, InventoryItem entity)
         {
-            if (!InventoryExists(InventoryId))
+            try
             {
-              
-                throw new ArgumentOutOfRangeException(nameof(InventoryId), "This Inventory Id is not exist in database.");
-            }
+                var inventory = _context.Inventory.FirstOrDefault(a => a.id == InventoryId);
 
-            if (InventoryId <= 0)
-            {
-                throw new ArgumentNullException(nameof(InventoryId));
-            }
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-
-            entity.Inventoryid = InventoryId;
-            _context.inventoryItem.Add(entity);
-            _context.SaveChanges();
+                if (inventory == null)
+                {
+                    throw new InventoryNotFoundException(nameof(InventoryId), "This Inventory Id is not exist in database.");
                 }
+
+                if (InventoryId <= 0)
+                {
+                    throw new ArgumentNullException(nameof(InventoryId));
+                }
+                if (entity == null)
+                {
+                    throw new ArgumentNullException(nameof(entity));
+                }
+
+                entity.Inventoryid = InventoryId;
+                _context.inventoryItem.Add(entity);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public IEnumerable<InventoryItem> GetInventoryItems(InventoryItemResourceParameters inventoryItemResourceParameters)
         {
@@ -78,7 +95,7 @@ namespace Bahar.DemoApp.InventoryService.Repository.SQLServer
 
             IQueryable<InventoryItem> inventoryItems = _context.inventoryItem;
 
-            inventoryItems = inventoryItems.Where(x => x.UOM == (UnitOfMesure)inventoryItemResourceParameters.UOM 
+            inventoryItems = inventoryItems.Where(x => x.UOM == (UnitOfMesure)inventoryItemResourceParameters.UOM
             || x.SKU.Contains(searchQuery)
             || x.Quentity == inventoryItemResourceParameters.Quantity
             || x.Name.Contains(searchQuery));
