@@ -4,4 +4,21 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ResourceParameters\InventoryItemResourceParameters.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bahar.DemoApp.InventoryService.Model\Bahar.DemoApp.InventoryService.Model.csproj" />
+    <ProjectReference Include="..\Bahar.DemoApp.InventoryService.Repository.SQLServer\Bahar.DemoApp.InventoryService.Repository.SQLServer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ResourceParameters\" />
+  </ItemGroup>
+
 </Project>
